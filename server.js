@@ -14,6 +14,11 @@ mongoose.connect(db).then(()=>console.log('mongodb connected....'))
 app.get('/dbItems',async(req,res)=>{
     const data=await Item.find().sort({date:-1}).then((items)=>{res.send(items)})
 })
+app.post('/singleItem',(req,res)=>{
+  Item.find({name:req.body.name}).sort({date:-1}).then((item)=>{
+    res.send(item)
+  })
+})
 app.get('/webitems',async(req,res)=>{
     
       const items=await getItems()
